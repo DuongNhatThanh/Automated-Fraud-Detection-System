@@ -77,37 +77,7 @@ df = df[:1] # Selects only the first row (the user input data)
 # Reads in saved classification model
 if st.button("Predict"):
     load_clf = tf.keras.models.load_model('fraud.h5', compile=False)
-    load_clf.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-
-
-
-    # Apply model to make predictions
-
-    y_probs = load_clf.predict(df)
-    pred = tf.round(y_probs)
-    pred = tf.cast(pred, tf.int32)
-
-    st.markdown(
-        """
-    <style>
-    [data-testid="stMetricValue"] {
-        font-size: 25px;
-    }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    if pred == 0:
-
-        col1, col2 = st.columns(2)
-        col1.metric("Prediction", value="Transaction is not fraudulent ")
-        col2.metric("Confidence Level", value=f"{np.round(np.max(y_probs) * 100)}%")
-    else:
-        col1, col2 = st.columns(2)
-        col1.metric("prediction", value="Transaction is fraudulent")
-        col2.metric("Confidence Level", value=f"{np.round(np.max(y_probs) * 100)}%")
+    st.warning("Successful")
 
 
 
